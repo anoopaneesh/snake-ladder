@@ -1,0 +1,27 @@
+.main{
+    display: flex;
+    align-items: center;
+    gap:100px;
+}
+#board{
+    display: grid;
+    grid-template-columns: repeat(10,60px);
+    grid-template-rows: repeat(10,60px);
+    border:2px solid #222;
+    width:600px;
+    position:relative;
+}
+#board > div {
+    border:1px solid #555;
+}
+.snake{
+    background-color: rgb(255, 209, 209);
+}
+.ladder{
+    background-color: rgb(197, 255, 197);
+}
+.line{
+    position: absolute;
+    top:0;
+    left:0;
+}
