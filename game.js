@@ -10,5 +10,5 @@ export async function rollDice(event){
 }
 
 export function movePlayer(player,rolled){
-
+    // Add function to move player
 }
