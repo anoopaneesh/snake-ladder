@@ -1,17 +1,12 @@
-import { createBoard } from "./board.js";
-import { rollDice } from "./game.js";
+import { SnakeAndLadder } from "./snakeladder.js";
 
-async function main(){
-    const currentPlayer = {
-        id:1,
-        position:0,
-    }
-    const board = document.getElementById("board");
-    const rollDiceBtn = document.getElementById("rollBtn")
-    rollDiceBtn.onclick = rollDice
-    createBoard(board)
-    
+async function main() {
+  const snakeAndLadder = new SnakeAndLadder({
+    playerCount: 1,
+    snakeCount: 4,
+    ladderCount: 4,
+  });
+  snakeAndLadder.initGame();
 }
-
 
 main();

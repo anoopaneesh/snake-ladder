@@ -25,3 +25,11 @@
     top:0;
     left:0;
 }
+.player{
+    position:absolute;
+    z-index: 2;
+    transform: translate(-50%,-50%);
+}
+#id{
+    color:green
+}
