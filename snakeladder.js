@@ -18,7 +18,7 @@ export class SnakeAndLadder {
     snakeCount: 4,
     ladderCount: 4,
   };
-  currentPlayer = null;
+  currentPlayerIndex = 0;
   jumpMap = {};
   snakes = [];
   ladders = [];
@@ -37,20 +37,25 @@ export class SnakeAndLadder {
     this.players = this.createPlayers(this.config.playerCount);
     this.rollBtn.onclick = () => this.rollDice();
     this.resetBtn.onclick = () => this.resetGame();
-    this.startBtn.onclick = () => this.startGame();
-    this.currentPlayer = this.players[0];
+    this.startBtn.onclick = () => this.startGame(); 
+    this.currentPlayerIndex = 0
     const boardConfig = this.loadBoard();
     this.createBoard(boardConfig);
+  }
+  async changeToNextPlayer(){
+    this.currentPlayerIndex = (this.currentPlayerIndex+1)%this.players.length
   }
   async rollDice() {
     this.dice.innerText = "Rolling..";
     await new Promise((res) => setTimeout(res, 500));
     const rolled = getRandomInt(6) + 1;
     this.dice.innerText = rolled;
-    this.currentPlayer.move(rolled, this.jumpMap);
-    if (this.currentPlayer.getPosition() == 100) {
+    this.players[this.currentPlayerIndex].move(rolled, this.jumpMap);
+   
+    if (this.players[this.currentPlayerIndex].getPosition() == 100) {
       this.stopGame();
     }
+    this.changeToNextPlayer()
   }
   createPlayers(count) {
     const players = new Array(count).fill(0).map((item, index) => {
@@ -111,12 +116,12 @@ export class SnakeAndLadder {
     this.startBtn.disabled = true;
   }
   stopGame() {
-    this.message.innerText = `Player ${this.currentPlayer.id + 1} Won!`;
+    this.message.innerText = `Player ${this.players[this.currentPlayerIndex].id + 1} Won!`;
     this.rollBtn.disabled = true;
   }
   resetGame() {
     this.message.innerText = "";
-    this.currentPlayer = null;
+    this.currentPlayerIndex = 0;
     this.players = null;
     this.jumpMap = {};
     this.snakes = [];

@@ -26,7 +26,14 @@ export function createLine(x1, y1, x2, y2, color) {
 }
 
 export function createMarker(idx) {
-  return `<svg id="${idx}" class="player" height="50" width="50"><circle r="25" cx="25" cy="25" fill="blue"/></svg>`;
+  return `<svg id="${idx}" class="player" height="50" width="50"><circle r="25" cx="25" cy="25" fill="${generateColor()}"/></svg>`;
+}
+
+export function generateColor(){
+  const r = getRandomInt(255)
+  const g = getRandomInt(255)
+  const b = getRandomInt(255)
+  return `rgb(${r},${g},${b})`
 }
 
 export function getBoardIndex(idx) {
